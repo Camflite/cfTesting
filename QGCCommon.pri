@@ -19,7 +19,8 @@
 CONFIG -= debug_and_release
 CONFIG += warn_on
 CONFIG += resources_big
-
+CONFIG += c++17
+    
 linux {
     linux-g++ | linux-g++-64 | linux-g++-32 | linux-clang {
         message("Linux build")
@@ -91,7 +92,6 @@ linux {
         QMAKE_CXXFLAGS -= -Zc:strictStrings
         QMAKE_CXXFLAGS_RELEASE -= -Zc:strictStrings
         QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO -= -Zc:strictStrings
-        QMAKE_CXXFLAGS += /std:c++17
         QMAKE_CXXFLAGS_WARN_ON += /WX /W3 \
             /wd4005 \   # silence warnings about macro redefinition, these come from the shapefile code with is external
             /wd4290 \   # ignore exception specifications
