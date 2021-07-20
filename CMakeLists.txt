@@ -107,14 +107,15 @@ endif()
 if (GST_FOUND)
     add_definitions(
         -DQGC_GST_STREAMING
-        -DQGC_GST_TAISYNC_ENABLED
-        -DQGC_GST_MICROHARD_ENABLED
     )
-endif()
 
-add_definitions(
-    -DQGC_ENABLE_MAVLINK_INSPECTOR
-)
+    option(QGC_GST_MICROHARD_ENABLED "Enable microhard" OFF)
+    option(QGC_GST_TAISYNC_ENABLED "Enable taisyng" OFF)
+else()
+	if (QGC_GST_MICROHARD_ENABLED OR QGC_GST_TAISYNC_ENABLED)
+		message(FATAL_ERROR "You tried to enable Microhard or Taisync but gstreamer is not found. Make sure to set PKG_CONFIG_EXECUTABLE and/or PKG_CONFIG_PATH properly.")
+	endif()
+endif()
 
 #=============================================================================
 # Qt5
